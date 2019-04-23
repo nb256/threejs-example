@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import React, { useRef, useEffect, useMemo } from "react";
-import { apply, Canvas, useRender, useThree } from "react-three-fiber";
+import React, { useEffect, useMemo } from "react";
+import { Canvas, useThree } from "react-three-fiber";
 import { useSprings, a } from "react-spring/three";
 // import * as resources from "./resources/index";
 // import WebVR from "./resources/WebVR.js";
@@ -23,7 +23,6 @@ const { OrbitControls } = require("./resources/controls/OrbitControls");
 // }
 
 const number = 70;
-const colors = ["#FFFFFF", "#000000", "#FFFFFF", "#000000"];
 const random = () => {
   const r = Math.random();
   return {
@@ -32,14 +31,12 @@ const random = () => {
       30 - Math.random() * 60,
       Math.random() * 40
     ],
-    color: colors[Math.round(Math.random() * (colors.length - 1))],
     scale: [6 + r * 10, 6 + r * 10, 1]
   };
 };
 
 function Content() {
-  const { viewport, camera } = useThree();
-  const aspect = viewport.width / 6;
+  const { camera } = useThree();
   const [springs, set] = useSprings(number, i => ({
     from: random(),
     ...random(),
